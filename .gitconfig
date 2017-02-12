@@ -1,3 +1,5 @@
 [user]
 	name = Michał Papierski
 	email = michal@papiersk"i.ne"t
+[core]
+	excludesfile = ~/.gitignore
