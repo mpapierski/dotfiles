@@ -3,3 +3,4 @@
 	email = michal@papiersk"i.ne"t
 [core]
 	excludesfile = ~/.gitignore
+	editor = vim
