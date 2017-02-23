@@ -17,6 +17,9 @@ if exists("&relativenumber")
     au BufReadPost * set relativenumber
 endif
 
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
 " Enable vim-solarized theme
 
 " This fixes nasty colors
