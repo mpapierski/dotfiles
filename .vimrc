@@ -2,6 +2,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" Make Vim more useful
+set nocompatible
 " Show "invisible" characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
