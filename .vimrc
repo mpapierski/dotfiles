@@ -2,6 +2,10 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" Show "invisible" characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
+
 " Enable vim-solarized theme
 
 " This fixes nasty colors
