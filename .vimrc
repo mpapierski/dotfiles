@@ -5,6 +5,15 @@ filetype plugin indent on
 " Show "invisible" characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
+" Enable line numbers
+set number
+" Highlight current line
+set cursorline
+" Use relative line numbers
+if exists("&relativenumber")
+    set relativenumber
+    au BufReadPost * set relativenumber
+endif
 
 " Enable vim-solarized theme
 
