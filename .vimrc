@@ -55,3 +55,10 @@ set statusline=%{fugitive#statusline()}
 " vim-markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c', 'cpp']
+
+" Multiple cursors
+let g:multi_cursor_start_key='<C-d>'
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-k>'
+let g:multi_cursor_quit_key='<Esc>'
