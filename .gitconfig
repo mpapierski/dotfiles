@@ -1,6 +1,11 @@
 [alias]
 	sed = !sh -c 'git grep --null --full-name --name-only --perl-regexp -e \"$1\" | xargs -0 perl -i -p -e \"s/$1/$2/g\"' -
-	s = status --short
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
 [user]
 	name = Michał Papierski
 	email = michal@papiersk"i.ne"t
