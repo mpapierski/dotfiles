@@ -1,3 +1,9 @@
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[user]
+	name = Michał Papierski
+	email = michal@papiersk"i.ne"t
 [alias]
 	sed = !sh -c 'git grep --null --full-name --name-only --perl-regexp -e \"$1\" | xargs -0 perl -i -p -e \"s/$1/$2/g\"' -
 
@@ -23,9 +29,7 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-[user]
-	name = Michał Papierski
-	email = michal@papiersk"i.ne"t
-[core]
-	excludesfile = ~/.gitignore
-	editor = vim
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
