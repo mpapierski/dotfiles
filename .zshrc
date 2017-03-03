@@ -24,3 +24,8 @@ elif command -v xclip >/dev/null 2>&1; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
 fi
+
+# Make `open` working on Linux too.
+if command -v xdg-open >/dev/null 2>&1; then
+    alias open='xdg-open &>/dev/null'
+fi
