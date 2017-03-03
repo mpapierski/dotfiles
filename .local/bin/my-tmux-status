@@ -1,0 +1,74 @@
+#!/bin/bash
+# Script to do fancy git status in tmux
+
+LOCATION="right"
+
+CURRENT_STATUS=""
+CURRENT_STYLE=""
+
+# Save current style of status
+save_status() {
+    CURRENT_STATUS="$(tmux show -vg "status-$LOCATION")"
+    CURRENT_STYLE="$(tmux show -vg "status-$LOCATION-style")"
+}
+
+# Set new status
+set_status() {
+    save_status
+    status_string="#[$CURRENT_STYLE]$CURRENT_STATUS$1"
+    tmux set-window-option "status-right" "$status_string"
+}
+
+# Get whether branch needs to be synced.
+sync() {
+    unpushed=$(git cherry -v @{upstream} 2>/dev/null)
+    if [[ $unpushed == "" ]]; then
+        echo ""
+    else
+        echo "⟳#[default]"
+    fi
+}
+
+# Check current branch
+branch() {
+    echo $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+}
+
+# Get whether branch needs to be synced.
+sync() {
+    unpushed=$(git cherry -v @{upstream} 2>/dev/null)
+    if [[ $unpushed == "" ]]; then
+        echo ""
+    else
+        echo "⟳"
+    fi
+}
+
+# Check if repo is in clean state
+clean() {
+    if ! git diff --exit-code &>/dev/null; then
+        echo "*"
+    fi
+}
+
+# Display git information
+my_git() {
+    if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
+        echo " on $(branch)$(clean)$(sync)"
+    fi
+}
+
+# Main callback called every time something changes
+my_tmux_status() {
+    if [ x$TMUX = 'x' ]; then
+        # Need to check
+        return
+    fi
+    set_status "$(my_git)"
+}
+
+setup() {
+    precmd_functions+=(my_tmux_status)
+}
+
+setup

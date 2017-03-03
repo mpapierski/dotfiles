@@ -29,3 +29,7 @@ fi
 if command -v xdg-open >/dev/null 2>&1; then
     alias open='xdg-open &>/dev/null'
 fi
+
+
+# Load tmux statusline
+. ~/.local/bin/my-tmux-status
