@@ -25,12 +25,14 @@ if command -v xdg-open >/dev/null 2>&1; then
 fi
 
 # Lock the screen when going away from keyboard
-if command -v gnome-screensaver-command >/dev/null 2>&1; then
-    # For Linux
-    alias afk='gnome-screensaver-command -l'
-elif command -v dbus-send >/dev/null 2>&1; then
-    alias afk='dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock'
-else
+if [[ "$(uname)" == 'Linux' ]]; then
+    if command -v gnome-screensaver-command >/dev/null 2>&1; then
+        # For Linux
+        alias afk='gnome-screensaver-command -l'
+    elif command -v dbus-send >/dev/null 2>&1; then
+        alias afk='dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock'
+    fi
+elif [[ "$(uname)" == "darwin"* ]]; then
     # For macOS
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 fi
