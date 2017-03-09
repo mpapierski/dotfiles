@@ -2,6 +2,7 @@
 from __future__ import print_function
 import sys
 import argparse
+import socket
 
 try:
 
@@ -44,10 +45,18 @@ def main():
     httpd.allow_reuse_address = True
 
     # Manually bind socket and start the server.
-    httpd.server_bind()
+    try:
+        httpd.server_bind()
+    except socket.error as e:
+        print('Unable to bind socket:', e, file=sys.stderr)
+        return 1
     httpd.server_activate()
     print("Serving content on port:", args.port)
-    httpd.serve_forever()
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        return 0
 
 if __name__ == '__main__':
-    main()
+    exit_code = main()
+    sys.exit(exit_code)
