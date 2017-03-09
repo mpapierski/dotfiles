@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script holds most of one liners
+
 # Make command line clipboard working on Linux too.
 # See: http://superuser.com/questions/288320/whats-like-osxs-pbcopy-for-linux
 if command -v xsel >/dev/null 2>&1; then
@@ -15,3 +17,11 @@ if command -v xdg-open >/dev/null 2>&1; then
     alias open='xdg-open &>/dev/null'
 fi
 
+# Lock the screen when going away from keyboard
+if command -v gnome-screensaver-command >/dev/null 2>&1; then
+    # For Linux
+    alias afk='gnome-screensaver-command -l'
+else
+    # For macOS
+    alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+fi
