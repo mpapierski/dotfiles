@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from __future__ import print_function
 import sys
+import argparse
 
 try:
 
@@ -15,28 +16,38 @@ except ImportError:
     import http.server as server
     import socketserver
 
-handler = server.SimpleHTTPRequestHandler
-map = handler.extensions_map
-port = int(sys.argv[1])
 
-# Set default Content-Type to 'text/plain'.
-map[""] = "text/plain"
+def main():
+    parser = argparse.ArgumentParser(description='Serve local directory.')
+    parser.add_argument(
+        'port', type=int, help='listening port', nargs='?', default=8000)
+    args = parser.parse_args()
 
-# Serve everything as UTF-8 (although not technically
-# correct, this doesn't break anything for binary files).
-for key, value in map.items():
-    map[key] = value + "; charset=utf-8"
+    handler = server.SimpleHTTPRequestHandler
+    map = handler.extensions_map
 
-# Create but don't automatically bind socket
-# (the 'allow_reuse_address' option needs to be set first).
-httpd = socketserver.ThreadingTCPServer(("localhost", port), handler, False)
+    # Set default Content-Type to 'text/plain'.
+    map[""] = "text/plain"
 
-# Prevent 'cannot bind to address' errors on restart.
-# https://brokenbad.com/address-reuse-in-pythons-socketserver/
-httpd.allow_reuse_address = True
+    # Serve everything as UTF-8 (although not technically
+    # correct, this doesn't break anything for binary files).
+    for key, value in map.items():
+        map[key] = value + "; charset=utf-8"
 
-# Manually bind socket and start the server.
-httpd.server_bind()
-httpd.server_activate()
-print("Serving content on port:", port)
-httpd.serve_forever()
+    # Create but don't automatically bind socket
+    # (the 'allow_reuse_address' option needs to be set first).
+    httpd = socketserver.ThreadingTCPServer(
+        ("localhost", args.port), handler, False)
+
+    # Prevent 'cannot bind to address' errors on restart.
+    # https://brokenbad.com/address-reuse-in-pythons-socketserver/
+    httpd.allow_reuse_address = True
+
+    # Manually bind socket and start the server.
+    httpd.server_bind()
+    httpd.server_activate()
+    print("Serving content on port:", args.port)
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    main()
