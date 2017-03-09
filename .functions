@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Use Git’s colored diff when available
+hash git &>/dev/null;
+if command -v git >/dev/null 2>&1 ; then
+    function diff() {
+        git diff --no-index --color-words "$@";
+    }
+fi;

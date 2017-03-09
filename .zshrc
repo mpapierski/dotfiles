@@ -15,21 +15,19 @@ plugins=(git virtualenvwrapper pip brew docker go)
 
 source $ZSH/oh-my-zsh.sh
 
-# Make command line clipboard working on Linux too.
-# See: http://superuser.com/questions/288320/whats-like-osxs-pbcopy-for-linux
-if command -v xsel >/dev/null 2>&1; then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-elif command -v xclip >/dev/null 2>&1; then
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
-fi
+### Additional scripts {{{
 
-# Make `open` working on Linux too.
-if command -v xdg-open >/dev/null 2>&1; then
-    alias open='xdg-open &>/dev/null'
-fi
+# Load aliases
+. ~/.aliases
 
+# Load functions
+. ~/.functions
+
+### }}}
+
+### Misc {{{
 
 # Load tmux statusline
 . ~/.local/bin/my-tmux-status
+
+### }}}
