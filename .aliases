@@ -8,6 +8,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
 
 # Make command line clipboard working on Linux too.
 # See: http://superuser.com/questions/288320/whats-like-osxs-pbcopy-for-linux
