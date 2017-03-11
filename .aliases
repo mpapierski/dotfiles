@@ -33,7 +33,7 @@ if [[ "$(uname)" == 'Linux' ]]; then
     elif command -v dbus-send >/dev/null 2>&1; then
         alias afk='dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock'
     fi
-elif [[ "$(uname)" == "darwin"* ]]; then
+elif [[ "$(uname)" == "Darwin" ]]; then
     # For macOS
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 fi
