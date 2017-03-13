@@ -2,6 +2,15 @@
 
 # Read the lesspipe manpage for further details
 
+if [ -d "$1" ]; then
+    if command -v dircolors >/dev/null 2>&1; then
+        eval "$(dircolors -b)"
+        exec ls --color=force -lF "$1"
+    else
+        CLICOLOR=1 CLICOLOR_FORCE=1 LSCOLORS=ExGxFxdxCxfxDxxbadacad exec ls -lF "$1"
+    fi
+fi
+
 case "$1" in
     *.json)
         jq -C . "$1"
