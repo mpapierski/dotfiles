@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Read the lesspipe manpage for further details
+
+case "$1" in
+    *.json)
+        jq -C . "$1"
+        ;;
+    *)
+        exit 1
+esac
+
+exit 0
