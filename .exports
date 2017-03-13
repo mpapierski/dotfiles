@@ -17,5 +17,5 @@ export MANPAGER='less -X';
 if command -v lesspipe >/dev/null 2>&1; then
     eval "$(lesspipe)"
 else
-    export LESSOPEN='|~/.lessfilter %s'
+    export LESSOPEN='|"$HOME/.lessfilter" %s'
 fi
