@@ -30,11 +30,16 @@ if command -v pygmentize >/dev/null 2>&1; then
             pygmentize $pygmentize_opts "$1"
             ;;
         *)
-            if grep -c -q '#!/bin/bash' "$1"; then
-                pygmentize $pygmentize_opts -l sh "$1"
-            else
-                exit 1
-            fi
+            case "$(file "$1")" in
+                *"Python script"*)
+                    pygmentize $pygmentize_opts -l python "$1"
+                    ;;
+                *"Bourne-Again shell script"*)
+                    pygmentize $pygmentize_opts -l sh "$1"
+                    ;;
+                *)
+                    exit 1
+            esac
     esac
 fi
 
