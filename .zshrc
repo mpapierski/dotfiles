@@ -27,6 +27,9 @@ source $ZSH/oh-my-zsh.sh
 # Load functions
 . ~/.functions
 
+# Load exports
+. ~/.exports
+
 ### }}}
 
 ### Misc {{{
