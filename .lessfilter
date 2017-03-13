@@ -16,7 +16,26 @@ case "$1" in
         jq -C . "$1"
         ;;
     *)
-        exit 1
 esac
+
+shopt -s extglob
+# Process source codes known by `pygmentize`
+if command -v pygmentize >/dev/null 2>&1; then
+    pygmentize_opts="-f terminal256"
+    lexers="+($(pygmentize -L lexers |
+        perl -ne 'print join("|", split(/, /,$1)) . "|" if /\(filenames ([^\)]+)\)/' |
+        sed 's/|$//'))"
+    case "$1" in
+        $lexers)
+            pygmentize $pygmentize_opts "$1"
+            ;;
+        *)
+            if grep -c -q '#!/bin/bash' "$1"; then
+                pygmentize $pygmentize_opts -l sh "$1"
+            else
+                exit 1
+            fi
+    esac
+fi
 
 exit 0
