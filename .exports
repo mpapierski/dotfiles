@@ -16,4 +16,6 @@ export MANPAGER='less -X';
 # Load up "input preprocessor" for less.
 if command -v lesspipe >/dev/null 2>&1; then
     eval "$(lesspipe)"
+else
+    export LESSOPEN='|~/.lessfilter %s'
 fi
