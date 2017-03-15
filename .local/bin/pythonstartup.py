@@ -9,6 +9,7 @@ try:
     import os
     import sys
     import platform
+    import pprint
 except ImportError as exception:
     print('Shell Enhancement module problem: {0}').format(exception)
 else:
@@ -21,8 +22,8 @@ else:
         readline.parse_and_bind("tab: complete")
 
     # Enable History File
-    history_file = os.environ.get("PYTHON_HISTORY_FILE", 
-                                  os.path.join(os.environ['HOME'], 
+    history_file = os.environ.get("PYTHON_HISTORY_FILE",
+                                  os.path.join(os.environ['HOME'],
                                                '.pythonhistory'))
 
     if os.path.isfile(history_file):
@@ -32,4 +33,18 @@ else:
 
     atexit.register(readline.write_history_file, history_file)
 
-    print('Persistent session history and tab completion are enabled.')
+    # Enable pretty printing for stdout.
+    def display_hook(value):
+        """ Pretty-print provided value. """
+        if value is not None:
+            try:
+                import __builtin__
+                __builtin__._ = value
+            except ImportError:
+                __builtins__._ = value
+            pprint.pprint(value)
+    sys.displayhook = display_hook
+
+    print(
+        'Persistent session history, tab completion and pretty printing are'
+        ' enabled.')
