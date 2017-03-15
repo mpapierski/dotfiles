@@ -93,6 +93,7 @@ function doIt() {
           --exclude ".DS_Store" \
           --exclude ".gitmodules" \
           --exclude "bootstrap.sh" \
+          --exclude "README.md" \
           -avh --no-perms . ~;
     source ~/.bash_profile;
     popd >/dev/null 2>&1
