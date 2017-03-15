@@ -87,6 +87,7 @@ function doIt() {
         # This will do the initial bootstrap
         # with a bare minimum packages.
         bootstrap;
+        pushd ~/.dotfiles
     fi
     rsync --exclude ".git/" \
           --exclude ".DS_Store" \
@@ -94,6 +95,7 @@ function doIt() {
           --exclude "bootstrap.sh" \
           -avh --no-perms . ~;
     source ~/.bash_profile;
+    popd >/dev/null 2>&1
 }
 
 OPTS=`getopt -o fh --long force,help -- "$@"`
