@@ -19,3 +19,7 @@ if command -v lesspipe >/dev/null 2>&1; then
 else
     export LESSOPEN='|"$HOME/.lessfilter" %s'
 fi
+
+# Enhance Python repl by enabling history and completion
+export PYTHONSTARTUP="$HOME/.local/bin/pythonstartup.py"
+export PYTHON_HISTORY_FILE="$HOME/.python_history"
