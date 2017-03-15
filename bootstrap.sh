@@ -68,6 +68,9 @@ function bootstrap() {
         _install_package $package
     done
 
+    # Change shell to zsh
+    sudo chsh -s /bin/zsh
+
     # No need for `sudo` anymore
     # TODO: This should be registered as trap signals
     kill $_pid

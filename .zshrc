@@ -15,6 +15,9 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="lambda"
 
+# Disable automatic updates since we're managing oh-my-zsh on our own.
+DISABLE_AUTO_UPDATE=true
+
 plugins=(git virtualenvwrapper pip brew docker go)
 
 source $ZSH/oh-my-zsh.sh
