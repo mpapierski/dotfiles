@@ -23,3 +23,6 @@ fi
 # Enhance Python repl by enabling history and completion
 export PYTHONSTARTUP="$HOME/.local/bin/pythonstartup.py"
 export PYTHON_HISTORY_FILE="$HOME/.python_history"
+
+# Load up custom dircolors
+eval "$(dircolors -b ~/.dir_colors)"
