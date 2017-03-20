@@ -43,3 +43,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias ls="gls --color=auto"
     alias dircolors="gdircolors"
 fi
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
