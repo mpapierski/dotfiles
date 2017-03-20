@@ -41,3 +41,6 @@ source $ZSH/oh-my-zsh.sh
 . ~/.local/bin/my-tmux-status
 
 ### }}}
+
+# Chain load local zshrc for local customization
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local
