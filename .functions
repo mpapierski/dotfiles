@@ -60,3 +60,12 @@ function json() {
         jq -C . -
     fi
 }
+
+# Syntax-highlight XML strings or files
+function xml() {
+    if [ "$#" -ne 0 ]; then # argument
+        xmllint --format - <<< "$@" | pygmentize -l xml
+    else
+        xmllint --format - | pygmentize -l xml
+    fi
+}
