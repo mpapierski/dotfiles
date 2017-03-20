@@ -49,3 +49,6 @@ alias reload="exec $SHELL -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# Correct way to check weather
+alias weather='\curl -q wttr.in'
