@@ -51,3 +51,12 @@ if [ -e /etc/zsh_command_not_found ]; then
     # Load up command not found handler
     . /etc/zsh_command_not_found
 fi
+
+# Syntax-highlight JSON strings or files
+function json() {
+    if [ "$#" -ne 0 ]; then # argument
+        jq -C . - <<< "$@"
+    else
+        jq -C . -
+    fi
+}
