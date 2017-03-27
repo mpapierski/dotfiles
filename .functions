@@ -75,8 +75,17 @@ function alert() {
     if [ "$#" -ne 2 ]; then
         (>&2 echo "Usage: alert [title] [body]")
     fi
-    # TODO: Find a way to do this on macOS as well
-    notify-send "$1" "$2"
+    if [ "$(uname)" = "Linux" ]; then
+        notify-send "$1" "$2"
+    elif [ "$(uname)" = "Darwin" ]; then
+        osascript -- - "$1" "$2" <<'EOF'
+on run(argv)
+    return display notification item 2 of argv with title item 1 of argv
+end
+EOF
+    else
+        (>&2 echo "Unable to send notification on this platform.")
+    fi
 }
 
 # Wrapper to run long running process and notify later
