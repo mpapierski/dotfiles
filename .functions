@@ -69,3 +69,20 @@ function xml() {
         xmllint --format - | pygmentize -l xml
     fi
 }
+
+# Graphical alert
+function alert() {
+    if [ "$#" -ne 2 ]; then
+        (>&2 echo "Usage: alert [title] [body]")
+    fi
+    # TODO: Find a way to do this on macOS as well
+    notify-send "$1" "$2"
+}
+
+# Wrapper to run long running process and notify later
+function wait_for(){
+    local start="$(date +%s)"
+    "$@"
+    local exit_code="$?"
+    alert "Notification" "Long running command \"$(echo $@)\" took $(($(date +%s) - start)) seconds to finish with exit code $exit_code"
+}
