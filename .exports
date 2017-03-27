@@ -26,3 +26,8 @@ export PYTHON_HISTORY_FILE="$HOME/.python_history"
 
 # Load up custom dircolors
 eval "$(dircolors -b ~/.dir_colors)"
+
+# Set up pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
