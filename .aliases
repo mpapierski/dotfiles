@@ -52,3 +52,8 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Correct way to check weather
 alias weather='\curl -q wttr.in'
+
+# I couldn't really figure out how to install command line tools in SourceTree
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias stree='open -a SourceTree'
+fi
