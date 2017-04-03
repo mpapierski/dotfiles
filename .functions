@@ -95,3 +95,9 @@ function wait_for(){
     local exit_code="$?"
     alert "Notification" "Long running command \"$(echo $@)\" took $(($(date +%s) - start)) seconds to finish with exit code $exit_code"
 }
+
+# Use gitignore.io service
+function gi() {
+    # Source: https://www.gitignore.io/docs
+    curl -L -s "https://www.gitignore.io/api/$@"
+}
