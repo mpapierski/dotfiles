@@ -101,3 +101,15 @@ function gi() {
     # Source: https://www.gitignore.io/docs
     curl -L -s "https://www.gitignore.io/api/$@"
 }
+
+# Create a git.io short URL
+function gitio() {
+    # TODO: Check if we're in git repo and origin points to github and if the
+    # argument is file in the repo then shorten URL + file path from HEAD.
+    if [[ "$#" -eq 1 ]]; then
+        curl -s -i https://git.io/ -F "url=${1}" | awk '$1 == "Location:" { print $2 }'
+    else
+        (>&2 echo "Usage: \`gitio url\`");
+        return 1;
+    fi;
+}
