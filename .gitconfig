@@ -19,6 +19,23 @@
 	remotes = remote -v
 	# Show all aliases
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+[merge]
+	conflictstyle = diff3
+	# Standard diff is two sets of final changes. This introduces the original text before each side's changes.
+	# https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
+[push]
+	default = simple
+	# "push the current branch back to the branch whose changes are usually integrated into the current branch"
+	# "refuse to push if the upstream branch’s name is different from the local one"
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
+
+	followTags = true
+	# Because I get sick of telling git to do it manually
+	# https://git-scm.com/docs/git-config#git-config-pushfollowTags
+[status]
+	showUntrackedFiles = all
+	# Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
+	# https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
 [color]
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
