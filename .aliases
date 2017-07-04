@@ -25,21 +25,23 @@ if command -v xdg-open >/dev/null 2>&1; then
     alias open='xdg-open &>/dev/null'
 fi
 
+local UNAME="$(uname)"
+
 # Lock the screen when going away from keyboard
-if [[ "$(uname)" == 'Linux' ]]; then
+if [[ "$UNAME" == 'Linux' ]]; then
     if command -v gnome-screensaver-command >/dev/null 2>&1; then
         # For Linux
         alias afk='gnome-screensaver-command -l'
     elif command -v dbus-send >/dev/null 2>&1; then
         alias afk='dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock'
     fi
-elif [[ "$(uname)" == "Darwin" ]]; then
+elif [[ "$UNAME" == "Darwin" ]]; then
     # For macOS
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 fi
 
 # On macOS create aliases for few GNU coreutils
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$UNAME" == "Darwin" ]]; then
     alias ls="gls --color=auto"
     alias dircolors="gdircolors"
 fi
@@ -54,6 +56,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias weather='\curl -q wttr.in'
 
 # I couldn't really figure out how to install command line tools in SourceTree
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$UNAME" == "Darwin" ]]; then
     alias stree='open -a SourceTree'
+    alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 fi
+
