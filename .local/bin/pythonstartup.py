@@ -41,7 +41,7 @@ else:
                 import __builtin__
                 __builtin__._ = value
             except ImportError:
-                __builtins__._ = value
+                __builtins__['_'] = value
             pprint.pprint(value)
     sys.displayhook = display_hook
 
