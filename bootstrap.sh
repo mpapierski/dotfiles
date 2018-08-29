@@ -14,6 +14,7 @@ basic_packages=(
     # Those are just for fun
     "fortune"
     "cowsay"
+    "lolcat"
 )
 
 function _is_linux() {
@@ -81,7 +82,7 @@ function bootstrap() {
     git clone --recursive https://github.com/mpapierski/dotfiles ~/.dotfiles
 
     # Last final touch to make this script complete...
-    fortune | cowsay
+    fortune | cowsay | lolcat
 }
 
 function doIt() {
