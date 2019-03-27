@@ -113,3 +113,22 @@ function gitio() {
         return 1;
     fi;
 }
+
+function t() {
+    # Wraps taskwarrior and adds tasks with current context if present
+    local context="$(task _get rc.context)"
+    if [[ "x$context" = 'x' ]]; then
+        # No context whatsoever
+        task $@
+    else
+        local filter="$(task _get rc.context.$context)"
+        if [[ "x$1" = 'xadd' ]]; then
+            # Append context's filter when adding tasks
+            echo "Automatically appending $context filter $filter to the task"
+            task $@ $filter
+        else
+            # Any other command
+            task $@
+        fi
+    fi
+}
