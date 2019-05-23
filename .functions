@@ -132,3 +132,21 @@ function t() {
         fi
     fi
 }
+
+function timew_pause() {
+  timew stop && \
+    echo "$(date) Press CTRL+D to resume..." && \
+    cat && \
+    echo "$(date) Resuming" && \
+    timew continue
+}
+
+# Wraps timew and provides additional commands
+function timew() {
+  if [ "$1" = 'pause' ]; then
+    timew_pause
+  else
+    # Fallback to original timew
+    command timew "$@"
+  fi
+}
