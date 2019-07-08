@@ -18,7 +18,14 @@ ZSH_THEME="lambda"
 # Disable automatic updates since we're managing oh-my-zsh on our own.
 DISABLE_AUTO_UPDATE=true
 
-plugins=(git pip brew docker go)
+plugins=(
+    git
+    pip
+    brew
+    docker
+    go
+    fzf
+)
 
 source $ZSH/oh-my-zsh.sh
 
