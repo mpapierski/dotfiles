@@ -25,6 +25,7 @@
 
 # Its already in dotfiles, so no need to keep track of it
 ~/.vim
+~/.viminfo
 ~/.dotfiles
 ~/.pyenv
 ~/.nvm
