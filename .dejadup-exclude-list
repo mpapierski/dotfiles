@@ -20,6 +20,7 @@
 
 # Its already in dotfiles, so no need to keep track of it
 ~/.vim
+~/.dotfiles
 
 # Temporary data that always changes
 
