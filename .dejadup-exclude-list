@@ -21,6 +21,7 @@
 ~/.sbt
 ~/.fzf
 ~/.zoom
+~/.ivy2
 
 # Its already in dotfiles, so no need to keep track of it
 ~/.vim
