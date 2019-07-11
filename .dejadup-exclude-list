@@ -14,13 +14,20 @@
 ~/.cache
 ~/.npm
 ~/.cargo
+~/.rustup
 ~/.virtualenvs
 ~/.dropbox-dist
 ~/.dropbox
+~/.sbt
+~/.fzf
+~/.zoom
 
 # Its already in dotfiles, so no need to keep track of it
 ~/.vim
 ~/.dotfiles
+~/.pyenv
+~/.nvm
+~/.oh-my-zsh
 
 # Temporary data that always changes
 
