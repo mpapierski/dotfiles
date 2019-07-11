@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 """
 Since dejadup does not understand wildcards in its UI this script is
@@ -56,7 +56,7 @@ def read_paths():
 
 def expand_wildcards(directories):
     for directory in directories:
-        for path in glob.glob(directory):
+        for path in glob.iglob(directory, recursive=True):
             yield path
 
 
