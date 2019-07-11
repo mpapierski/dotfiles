@@ -1,0 +1,24 @@
+#
+# Use ~/.local/bin/reload-dejadup-config to reload gsettings
+# 
+# Author: Michał Papierski <michal@papierski.net>
+#
+
+# Its already synced so no need
+~/Dropbox
+
+# Custom apps
+~/snap
+
+~/.local/share/Trash
+~/.cache
+~/.npm
+~/.cargo
+~/.virtualenvs
+~/.dropbox-dist
+~/.dropbox
+
+# Temporary data that always changes
+
+~/.config/**/Cache
+~/.config/**/CachedData

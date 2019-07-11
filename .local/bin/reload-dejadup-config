@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+"""
+Since dejadup does not understand wildcards in its UI this script is
+resposible for reading a list of paths from ~/.dejadup-exclude-list and
+expands paths found there, and stores the new settings for dejadup.
+
+Author: Michał Papierski <michal@papierski.net>
+"""
+
+import subprocess
+import ast
+import glob
+import os
+from configparser import ConfigParser
+
+
+def expand_path(path):
+    fns = [
+        os.path.expanduser,
+        os.path.expandvars,
+    ]
+    for fn in fns:
+        path = fn(path)
+    return path
+
+
+def read_config(fileobj):
+    for line in fileobj:
+        if line.startswith('#'):
+            continue
+
+        stripped = line.strip()
+        if not stripped:
+            continue
+        yield expand_path(stripped)
+
+
+def read_paths():
+    configs = [
+        './.dejadup-exclude-list',
+        '~/.dejadup-exclude-list',
+    ]
+    unique_paths = set()
+    for config in configs:
+        try:
+            filename = os.path.expanduser(os.path.expandvars(config))
+            with open(filename) as fileobj:
+                print('Reading config at {}...'.format(filename))
+                for path in read_config(fileobj):
+                    unique_paths.add(path)
+        except IOError:
+            pass
+
+    return unique_paths
+
+def expand_wildcards(directories):
+    for directory in directories:
+        for path in glob.glob(directory):
+            yield path
+
+
+def get_dejadup_excludes():
+    output = subprocess.check_output(['gsettings', 'get', 'org.gnome.DejaDup', 'exclude-list'])
+    output = output.decode('utf-8').strip()
+    if output.startswith('@as '):
+        output = output[4:]
+    if output[0] == '[' and output[-1] == ']':
+        return ast.literal_eval(output)
+
+    raise RuntimeError('Unknown exclude-list: {}'.format(output))
+
+
+def print_current_exclude_list():
+    for i, path in enumerate(get_dejadup_excludes(), 1):
+        print('{}. {}'.format(i, path))
+
+
+def set_dejadup_excludes(directories):
+    paths = str(list(directories))
+    output = subprocess.check_output(['gsettings', 'set', 'org.gnome.DejaDup', 'exclude-list', paths])
+    if output.strip():
+        raise RuntimeError('Expected empty stdout but received {}'.format(output))
+
+
+def main():
+    print('Old')
+    print_current_exclude_list()
+    new_paths = expand_wildcards(read_paths())
+    set_dejadup_excludes(new_paths)
+    print('New')
+    print_current_exclude_list()
+
+
+if __name__ == '__main__':
+    main()
