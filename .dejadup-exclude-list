@@ -18,6 +18,9 @@
 ~/.dropbox-dist
 ~/.dropbox
 
+# Its already in dotfiles, so no need to keep track of it
+~/.vim
+
 # Temporary data that always changes
 
 ~/.config/**/Cache
