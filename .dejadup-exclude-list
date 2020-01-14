@@ -38,3 +38,6 @@
 
 # Do not backup /target/ for Rust projects
 ~/Projects/**/target
+
+# Conan data
+~/.conan/data
