@@ -41,3 +41,6 @@
 
 # Conan data
 ~/.conan/data
+
+# Virtual Machines
+~/vmware
