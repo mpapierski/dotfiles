@@ -44,3 +44,7 @@
 
 # Virtual Machines
 ~/vmware
+
+# Hides ProtonVPN protected files
+~/.pvpn-cli/pvpnpass
+
