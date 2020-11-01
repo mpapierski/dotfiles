@@ -23,7 +23,7 @@ plugins=(
     pip
     brew
     docker
-    go
+    golang
     fzf
 )
 

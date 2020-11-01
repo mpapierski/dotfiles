@@ -11,6 +11,7 @@ basic_packages=(
     "zsh"
     "vim"
     "tmux"
+    "fzf"
     # Those are just for fun
     "fortune"
     "cowsay"
